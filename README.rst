@@ -1,16 +1,16 @@
 Introduction
 ============
 
-.. image:: https://readthedocs.org/projects/electronutlabs-circuitpython-ltr329als01/badge/?version=latest
-    :target: https://circuitpython.readthedocs.io/projects/ltr329als01/en/latest/
+.. image:: https://readthedocs.org/projects/circuitpython-ltr329als01-library/badge/?version=latest
+    :target: https://circuitpython-ltr329als01-library.readthedocs.io/en/latest/
     :alt: Documentation Status
 
 .. image:: https://img.shields.io/discord/327254708534116352.svg
     :target: https://discord.gg/nBQh6qu
     :alt: Discord
 
-.. image:: https://travis-ci.com/electronut/Electronutlabs_CircuitPython_LTR329ALS01.svg?branch=master
-    :target: https://travis-ci.com/electronut/Electronutlabs_CircuitPython_LTR329ALS01
+.. image:: https://api.travis-ci.org/electronut/Electronutlabs_CircuitPython_LTR329ALS01.svg?branch=master
+    :target: https://travis-ci.org/electronut/Electronutlabs_CircuitPython_LTR329ALS01/
     :alt: Build Status
 
 Circuitpython library for reading data from light sensor LTR329ALS01.
@@ -27,40 +27,25 @@ Please ensure all dependencies are available on the CircuitPython filesystem.
 This is easily achieved by downloading
 `the Adafruit library and driver bundle <https://github.com/adafruit/Adafruit_CircuitPython_Bundle>`_.
 
-Installing from PyPI
-=====================
-.. note:: This library is not available on PyPI yet. Install documentation is included
-   as a standard element. Stay tuned for PyPI availability!
-
-.. todo:: Remove the above note if PyPI version is/will be available at time of release.
-   If the library is not planned for PyPI, remove the entire 'Installing from PyPI' section.
-
-On supported GNU/Linux systems like the Raspberry Pi, you can install the driver locally `from
-PyPI <https://pypi.org/project/adafruit-circuitpython-ltr329als01/>`_. To install for current user:
-
-.. code-block:: shell
-
-    pip3 install adafruit-circuitpython-ltr329als01
-
-To install system-wide (this may be required in some cases):
-
-.. code-block:: shell
-
-    sudo pip3 install adafruit-circuitpython-ltr329als01
-
-To install in a virtual environment in your current project:
-
-.. code-block:: shell
-
-    mkdir project-name && cd project-name
-    python3 -m venv .env
-    source .env/bin/activate
-    pip3 install adafruit-circuitpython-ltr329als01
-
 Usage Example
 =============
 
-.. todo:: Add a quick, simple example. It and other examples should live in the examples folder and be included in docs/examples.rst.
+.. code-block:: python
+
+    import time
+    import board
+    import busio
+    import electronutlabs_ltr329als01
+
+    i2c = busio.I2C(board.SCL, board.SDA)
+    ltr = electronutlabs_ltr329als01.LTR329ALS01(i2c)
+
+    ltr.gain = electronutlabs_ltr329als01.CONST_GAIN_4X
+
+    while True:
+        print("%.2f Lux" % (ltr.get_lux()))
+        time.sleep(1)
+
 
 Contributing
 ============
